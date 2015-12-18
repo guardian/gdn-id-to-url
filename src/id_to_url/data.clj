@@ -1,11 +1,5 @@
 (ns id-to-url.data)
 
-(def lookup {
-    :polls poll-ids
-    :competitions competition-ids
-    :tables table-ids
-    })
-
 (def poll-ids [
     458215083
     458234681
@@ -10315,3 +10309,10 @@
 457745335
 457803140
 457848050])
+
+
+(def lookup {
+    :polls poll-ids
+    :competitions competition-ids
+    :tables table-ids
+    })
