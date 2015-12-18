@@ -23,7 +23,7 @@
     (let [futures (doall (map (fn [id] (lookup-url host api-key id)) data/competition-ids))]
         (map extract-url futures)))
 
-(defn cache-id [cache host api-key id]
+(defn cache-id-1 [cache host api-key id]
     (if (not (contains? @cache id))
         (let [{id :id lookup :result} (lookup-url host api-key id)]
             (if (contains? @lookup :body)
@@ -32,10 +32,17 @@
                     (swap! cache assoc id url))
                     (recur cache host api-key id)))))
 
+(defn cache-id [cache host api-key id]
+    (if (not (contains? @cache id))
+        (let [{id :id lookup :result} (lookup-url host api-key id)]
+            (if (contains? @lookup :body)
+                (let [json (json/parse-string (:body @lookup) true)
+                    enhanced-result (assoc @lookup :json json)]
+                    (swap! cache assoc id enhanced-result))
+                    (recur cache host api-key id)))))
+
 (defn populate-cache [cache host api-key]
     (doall (map (fn [id] (cache-id cache host api-key id)) data/competition-ids)))
-
-(defn competition-ids [] data/competition-ids)
 
 (defn foo
   "I don't do a whole lot."
