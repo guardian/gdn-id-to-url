@@ -42,7 +42,7 @@
                     (recur cache host api-key id)))))
 
 (defn populate-cache [cache host api-key content-type]
-    (doall (map (fn [id] (cache-id cache host api-key id)) (content-type data/lookup))))
+    (dorun (map (fn [id] (cache-id cache host api-key id)) (content-type data/lookup))))
 
 (defn error-responses [cache]
     (filter (fn [r] (= (get-in r [:json :response :status]) "error")) cache))
