@@ -1,8 +1,7 @@
 (defproject id-to-url "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :description "Helps relate R2 ids to site urls"
+  :license {:name "Apache 2.0"
+            :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :jvm-opts ["-Xms512m" "-Xmx2G" "-XX:MaxPermSize=512m" "-server"]
   :dependencies [
   [org.clojure/clojure "1.7.0"]
